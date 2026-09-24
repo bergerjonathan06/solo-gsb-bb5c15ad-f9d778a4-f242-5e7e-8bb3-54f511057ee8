@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>口述史事件先后核对</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>口述史事件先后核对</h1>
+    <p class="subtitle">
+      粘贴多行 <code>事件甲,事件乙,最少分钟,最多分钟</code>，
+      系统逐行校验后联立全部时间差区间：有冲突则给出由原始行号构成的闭合矛盾链；
+      无冲突则给出以最早事件为第 0 分钟的可行时间线。
+    </p>
+  </header>
+
+  <main>
+    <section class="panel input-panel">
+      <div class="panel-head">
+        <h2>① 事件时间差区间</h2>
+        <div class="btn-row">
+          <button id="btn-check" class="primary" type="button">核对事件先后</button>
+          <button id="btn-example" type="button">一键填充示例</button>
+          <button id="btn-conflict" type="button">填充冲突示例</button>
+          <button id="btn-clear" type="button">清空</button>
+        </div>
+      </div>
+      <textarea
+        id="input"
+        spellcheck="false"
+        placeholder="例：
+出门,到车站,15,30
+到车站,列车进站,5,10
+列车进站,开车铃响,2,5"
+      ></textarea>
+      <p class="hint">
+        每行 4 个字段，半角逗号 “,” 或中文逗号 “，” 均可；分钟须为整数，允许负数；
+        空行会被跳过（行号仍保留）。
+      </p>
+    </section>
+
+    <div id="global-error" class="alert error hidden"></div>
+    <div id="result" class="hidden"></div>
+  </main>
+
+  <footer class="site-footer">
+    <span>差分约束 · Bellman–Ford 负环判定</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
